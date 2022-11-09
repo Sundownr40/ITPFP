@@ -1,50 +1,50 @@
 # ITPFP
 
 <!-- Bouncing Ball (Doodle Jump Improvement)
-The purpose of this game is to utilize my programming knowledge to envision, design, and ultimately play an improved video game based on "Doodle Jump," a popular computer game game in which the player jumps vertically along platforms to gain a high score while staying within bounds of the screen.
+The purpose of this game is to utilize my programming knowledge to envision, design, and ultimately play an improved video game based on "Doodle Jump," a popular computer game in which the player jumps vertically along platforms to gain a high score while staying within bounds of the screen.
 
 Description
-In my desiging of "Pink Rush," my first video game, I stumbled upon collision detection completely by accident. 
+In designing "Pink Rush," my first video game, I stumbled upon collision detection completely by accident. Using this knowledge, I decided to create a game that would utilize this principle - collision - as the cornerstone for my project. Platforms that the player will be able to interact with via jumping will be organized vertically along the screen, enabling the player to traverse left or right to navigate the platforms while avoiding falling off to their death. The higher the player "jumps," the more the player's score will be. Some platforms will have the ability to move, others will act as stationery. I will add some additional features such as increased customizability, coloring, and various modes to play. 
 
-Getting Started
-
+Getting Started - - - 
 Dependencies
-Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-ex. Python 3.x, Pygame, etc.
+Python 3.11
+Pygame 
 
 Installing
-Must have Python 
+Must have Python 3.11
 Must have Pygame installed
 
 Executing program
+To execute the program, you must 
+- Download the program, likely from my repository
+- Open/copy to VScode (code editor)
+- Run the program 
+- Play the game 
+
 How to run the program
-Step-by-step bullets
-code blocks for commands
+- Program should open in VScode via file explorer post-download
+- Run the program via "Run Python File" in the top right corner of VScode
 
 Help
-Any advise for common problems or issues.
-command to run if program contains helper info
+Locate your file, and copy and paste the file path from there
+This should be done rather than type in the address in the terminal / command prompt
 
 Authors
-Contributors names and contact info
-ex. CJ Blastos
-ex. cj.blastos23@bcp.org
+Contributors' names and contact info
+CJ Blastos (Bellarmine College Prep Class of 2023)
+cj.blastos23@bcp.org
 
 Version History
-
-0.2
-Various bug fixes and optimizations
-See commit change or See release history
-
-0.1
-Initial Release
+Version 0.1 (Initial Release) (Released 11/9/22)
 
 License
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
+This project is licensed under the [MIT] License - see the LICENSE.md file for details
 
 Acknowledgments
-Inspiration, code snippets, etc.
-
+Doodle Jump
+Ryan Deivert '23
+"Pink Rush" (My original game)
 w3Schools
 PyGame
-Automate The Boring Stuff -->
+pythonprogramming.com
