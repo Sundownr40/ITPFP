@@ -14,6 +14,9 @@ import sys
 import random
 import time
 
+#Initialize Pygame
+pygame.init()
+
 #Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
