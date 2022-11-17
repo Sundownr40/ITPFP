@@ -1,6 +1,6 @@
 # ITPFP
 
-<!-- <!-- Bouncing Ball (Doodle Jump Improvement)
+Bouncing Ball (Doodle Jump Improvement)
 The purpose of this game is to utilize my programming knowledge to envision, design, and ultimately play an improved video game based on "Doodle Jump," a popular computer game in which the player jumps vertically along platforms to gain a high score while staying within bounds of the screen.
 
 Description
@@ -47,4 +47,4 @@ Ryan Deivert '23
 "Pink Rush" (My original game)
 w3Schools
 PyGame
-pythonprogramming.com -->
+pythonprogramming.com 
