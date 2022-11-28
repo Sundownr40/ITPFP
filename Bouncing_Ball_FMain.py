@@ -28,7 +28,7 @@ FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
 
 #Setting up clock to mesh with the FPS
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 400x450px Screen for the game
-pygame.display.set_caption("BB") #Names my game "Bouncing Ball" on the white game bar
+pygame.display.set_caption("Bouncing Ball") #Names my game "Bouncing Ball" on the white game bar
 
 #Colors. I like having a large variety 
 WHITE = (255, 255, 255)
@@ -41,3 +41,23 @@ ORANGE = (255,128,0)
 PURPLE = (106, 13, 173)
 PINK = (243, 58, 106)
 
+#Instantiating Classes (Player/Platforms)
+
+#Player
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__() 
+        self.surf = pygame.Surface((30, 30)) #30x30px player
+        self.surf.fill((RED)) #Player will be RED temporarally
+        self.rect = self.surf.get_rect(center = (10, 420))
+
+#Platforms
+class platform(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.surf = pygame.Surface((WIDTH, 20))
+        self.surf.fill((WHITE)) #Will be WHITE temporarally
+        self.rect = self.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
+
+BASEPLAT1 = platform() #Starting Platform Player will come to rest on
+PLY = Player #Player
