@@ -17,14 +17,18 @@ import time
 
 #Initialize Pygame
 pygame.init() 
-vec = pygame.math.Vector2 #2-Dimensional vectors (Vector2)
 
-#Setting up Constants
+vec = pygame.math.Vector2 #2-Dimensional vectors (Vector2)
 HEIGHT = 450 #HEIGHT
 WIDTH = 400 #WIDTH
-ACC = 1 #ACCELERATION
+ACC = 0.5 #ACCELERATION
 FRIC = -0.10 #FRICTION
 FPS = 60 #FPS
+FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
+
+#Setting up clock to mesh with the FPS
+displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 400x450px Screen for the game
+pygame.display.set_caption("BB") #Names my game "Bouncing Ball" on the white game bar
 
 #Colors. I like having a large variety 
 WHITE = (255, 255, 255)
