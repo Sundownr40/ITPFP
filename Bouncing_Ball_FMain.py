@@ -19,6 +19,7 @@ import time
 pygame.init() 
 
 vec = pygame.math.Vector2 #2-Dimensional vectors (Vector2)
+
 #Colors. I like having a large variety 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -29,9 +30,8 @@ YELLOW = (255,211,67)
 ORANGE = (255,128,0)
 PURPLE = (106, 13, 173)
 PINK = (243, 58, 106)
-#
-#
 
+#Global Variables
 HEIGHT = 450 #HEIGHT
 WIDTH = 400 #WIDTH
 ACC = 0.5 #ACCELERATION
@@ -39,26 +39,13 @@ FRIC = -0.01 #FRICTION
 FPS = 60 #FPS
 
 FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
+
 #Setting up clock to mesh with the FPS
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 400x450px Screen for the game
 pygame.display.set_caption("Bouncing Ball") #Names my game "Bouncing Ball" on the white game bar
 
 #Instantiating Classes (Player/Platforms)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-#Player
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
@@ -110,8 +97,6 @@ class Player(pygame.sprite.Sprite):
                         self.vel.y = 0
                         self.jumping = False
 
-
-
 class platform(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -131,9 +116,6 @@ class platform(pygame.sprite.Sprite):
         
         self.point = True   
         self.moving = True
-
-
-
 
     def move(self):
         if self.moving == True:  
