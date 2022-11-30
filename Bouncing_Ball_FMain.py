@@ -98,11 +98,39 @@ class Player(pygame.sprite.Sprite):
         if hits:
            self.vel.y = -15
 
+    def update(self):
+        hits = pygame.sprite.spritecollide(self, platforms, False)
+        if self.vel.y > 0:        
+            if hits:
+                if self.pos.y < hits[0].rect.bottom:
+                    if hits[0].rect.bottom == True:
+                        hits[0].rect.bottom == False
+                        self.score += 1          
+                        self.pos.y = hits[0].rect.top +1
+                        self.vel.y = 0
+                        self.jumping = False
 
 
 
+class platform(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.surf = pygame.Surface((random.randint(50,100), 12))
+        self.surf.fill((WHITE))
+        self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
+                                                 random.randint(0, HEIGHT-250)))
 
-
+class platform(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.surf = pygame.Surface((random.randint(50,100), 12))
+        self.surf.fill((BLUE))
+        self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
+                                                 random.randint(0, HEIGHT-250)))
+        self.speed = random.randint(-2, 2)
+        
+        self.point = True   
+        self.moving = True
 
 
 
