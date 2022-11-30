@@ -155,16 +155,16 @@ def plat_gen():
 BPLT = platform()
 P1 = Player()
 
-PT1.surf = pygame.Surface((WIDTH, 20))
-PT1.surf.fill((WHITE))
-PT1.rect = PT1.surf.get_rect(center = (WIDTH/2, HEIGHT-15))
+BPLT.surf = pygame.Surface((WIDTH, 20))
+BPLT.surf.fill((WHITE))
+BPLT.rect = BPLT.surf.get_rect(center = (WIDTH/2, HEIGHT-15))
 
 all_sprites = pygame.sprite.Group()
-all_sprites.add(PT1)
+all_sprites.add(BPLT)
 all_sprites.add(P1)
 
 platforms = pygame.sprite.Group()
-platforms.add(PT1)
+platforms.add(BPLT)
 
 for x in range(random.randint(7, 9)):
     pl = platform()
@@ -173,3 +173,23 @@ for x in range(random.randint(7, 9)):
     value = 0
 
 variableforfirstplatform = 0
+
+
+
+
+
+while True:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYDOWN:    
+            if event.key == pygame.K_SPACE:
+                P1.jump()
+ 
+    if P1.rect.top <= HEIGHT / 3:
+        P1.pos.y += abs(P1.vel.y)
+        for plat in platforms:
+            plat.rect.y += abs(P1.vel.y)
+            if plat.rect.top >= HEIGHT:
+                plat.kill()
