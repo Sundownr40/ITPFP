@@ -193,3 +193,30 @@ while True:
             plat.rect.y += abs(P1.vel.y)
             if plat.rect.top >= HEIGHT:
                 plat.kill()
+
+    if P1.rect.top > HEIGHT:
+        for entity in all_sprites:
+            entity.kill()
+            time.sleep(0)
+            displaysurface.fill((RED))
+            pygame.display.update()
+            time.sleep(1)
+            pygame.quit()
+            sys.exit()
+         
+    displaysurface.fill((BLACK))
+    P1.update()
+    plat_gen()
+ 
+    for entity in all_sprites:
+        displaysurface.blit(entity.surf, entity.rect)
+        entity.move()
+ 
+    plat_gen()
+    displaysurface
+    f = pygame.font.SysFont("Verdana", 20)     
+    g  = f.render(str(P1.score), True, (WHITE))   
+    displaysurface.blit(g, (WIDTH/15, 10))   
+
+    pygame.display.update()
+    FramePerSec.tick(FPS)
