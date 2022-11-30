@@ -135,15 +135,41 @@ class platform(pygame.sprite.Sprite):
 
 
 
+    def move(self):
+        if self.moving == True:  
+            self.rect.move_ip(self.speed,0)
+            if self.speed > 0 and self.rect.left > WIDTH:
+                self.rect.right = 0
+            if self.speed < 0 and self.rect.right < 0:
+                self.rect.left = WIDTH
 
+def plat_gen():
+    while len(platforms) < 9 :
+        width = random.randrange(50,100)
+        p  = platform()             
+        p.rect.center = (random.randrange(0, WIDTH - width),
+                             random.randrange(-50, 0))
+        platforms.add(p)
+        all_sprites.add(p)
 
-#Platforms
-class platform(pygame.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.surf = pygame.Surface((WIDTH, 20))
-        self.surf.fill((WHITE)) #Will be WHITE temporarally
-        self.rect = self.surf.get_rect(center = (WIDTH/2, HEIGHT - 10))
+BPLT = platform()
+P1 = Player()
 
-BPLT = platform() #Starting Platform Player will come to rest on
-P1 = Player() #Player
+PT1.surf = pygame.Surface((WIDTH, 20))
+PT1.surf.fill((WHITE))
+PT1.rect = PT1.surf.get_rect(center = (WIDTH/2, HEIGHT-15))
+
+all_sprites = pygame.sprite.Group()
+all_sprites.add(PT1)
+all_sprites.add(P1)
+
+platforms = pygame.sprite.Group()
+platforms.add(PT1)
+
+for x in range(random.randint(7, 9)):
+    pl = platform()
+    platforms.add(pl)
+    all_sprites.add(pl)
+    value = 0
+
+variableforfirstplatform = 0
