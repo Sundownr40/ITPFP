@@ -8,6 +8,11 @@
 #                                                                                             #
 ###############################################################################################
 
+#I want 
+#Starting Screen
+#Proper platform generation
+#Background image
+
 #Global Variables
 import pygame
 from pygame.locals import *
@@ -97,7 +102,7 @@ class Player(pygame.sprite.Sprite):
                         self.vel.y = 0
                         self.jumping = False
 
-class platform(pygame.sprite.Sprite):
+class platform(pygame.sprite.Sprite): #Starting platform
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
@@ -105,7 +110,7 @@ class platform(pygame.sprite.Sprite):
         self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
 
-class platform(pygame.sprite.Sprite):
+class platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
@@ -117,7 +122,7 @@ class platform(pygame.sprite.Sprite):
         self.point = True   
         self.moving = True
 
-    def move(self):
+    def move(self): #Movement for the Small moving platforms
         if self.moving == True:  
             self.rect.move_ip(self.speed,0)
             if self.speed > 0 and self.rect.left > WIDTH:
@@ -125,7 +130,7 @@ class platform(pygame.sprite.Sprite):
             if self.speed < 0 and self.rect.right < 0:
                 self.rect.left = WIDTH
 
-def plat_gen():
+def plat_gen(): #Platform generation
     while len(platforms) < 9 :
         width = random.randrange(50,100)
         p  = platform()             
