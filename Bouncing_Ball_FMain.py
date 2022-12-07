@@ -18,7 +18,6 @@ import pygame
 from pygame.locals import *
 import sys
 import random
-import time
 
 #Initialize Pygame
 pygame.init() 
@@ -113,10 +112,10 @@ class platform(pygame.sprite.Sprite): #Small moving platforms
 
 def plat_gen(): #Platform generation
     while len(platforms) < 9 :
-        width = random.randrange(75,125)
+        width = random.randint(75,125)
         p = platform()             
-        p.rect.center = (random.randrange(0, WIDTH - width),
-                        random.randrange(-50, 0))
+        p.rect.center = (random.randint(0, WIDTH - width),
+                        random.randint(-50, 0))
         platforms.add(p)
         all_sprites.add(p)
 
@@ -161,7 +160,6 @@ while True:
             entity.kill()
             displaysurface.fill((RED))
             pygame.display.update()
-            time.sleep(1)
             pygame.quit()
             sys.exit()
          
