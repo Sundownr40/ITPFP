@@ -10,7 +10,6 @@
 
 #I want 
 #Starting Screen
-#Proper platform generation
 #Background image
 
 #Global Variables
@@ -37,8 +36,8 @@ PINK = (243, 58, 106)
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
-WIDTH = 400 #WIDTH
-ACC = 0.5 #ACCELERATION
+WIDTH = 800 #WIDTH
+ACC = 0.9 #ACCELERATION
 FRIC = -0.01 #FRICTION
 FPS = 60 #FPS
 
@@ -53,7 +52,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
         self.surf = pygame.Surface((40, 40))
-        self.surf.fill((RED))
+        self.surf.fill((BLUE))
         self.rect = self.surf.get_rect()
         self.pos = vec((WIDTH/2, HEIGHT))
         self.vel = vec(0,-4)
@@ -80,26 +79,17 @@ class Player(pygame.sprite.Sprite):
 
         autobounce = pygame.sprite.spritecollide(self, platforms, False)
         if autobounce:
-           self.vel.y = -15 
-
-class startingplatform(pygame.sprite.Sprite): #Starting platform
-    def __init__(self):
-        super().__init__()
-        self.surf = pygame.Surface(((50,100)))
-        self.surf.fill((WHITE))
-        self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
-                                                 random.randint(0, HEIGHT-250)))
-
-
+           self.vel.y = -20 
+           
 class platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
-        self.surf.fill((BLUE))
-        self.rect = self.surf.get_rect(center = (random.randint(0,WIDTH-10),
+        self.surf.fill(WHITE)
+        self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
-        self.speed = random.randint(-2, 2)
-        self.point = True   
+        self.speed = random.randint(-4, 4)
+        self.point = True
         self.moving = True
 
     def move(self): #Movement for the Small moving platforms
@@ -112,7 +102,7 @@ class platform(pygame.sprite.Sprite): #Small moving platforms
 
 def plat_gen(): #Platform generation
     while len(platforms) < 9 :
-        width = random.randint(75,125)
+        width = random.randint(75,300)
         p = platform()             
         p.rect.center = (random.randint(0, WIDTH - width),
                         random.randint(-50, 0))
