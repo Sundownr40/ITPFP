@@ -28,7 +28,7 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
+BLUE = (0, 0, 255) 
 YELLOW = (255,211,67)
 ORANGE = (255,128,0)
 PURPLE = (106, 13, 173)
@@ -60,7 +60,7 @@ class Player(pygame.sprite.Sprite):
         self.jumping = False
         self.score = 0
 
-    def move(self):
+    def move(self): #Movement keys and acceleration
         self.acc = vec(0,0.5)
         pressed_keys = pygame.key.get_pressed()     
         if pressed_keys[K_a]:
@@ -68,7 +68,7 @@ class Player(pygame.sprite.Sprite):
         if pressed_keys[K_d]:
             self.acc.x = ACC
 
-        self.acc.x += self.vel.x * FRIC
+        self.acc.x += self.vel.x * FRIC #How movement is determined + keeping the player in bounds
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
         if self.pos.x > WIDTH:
@@ -77,7 +77,7 @@ class Player(pygame.sprite.Sprite):
             self.pos.x = WIDTH         
         self.rect.midbottom = self.pos
 
-        autobounce = pygame.sprite.spritecollide(self, platforms, False)
+        autobounce = pygame.sprite.spritecollide(self, platforms, False) #Player will constantly "bounce" when comes into contact with a platform.
         if autobounce:
            self.vel.y = -20 
            
