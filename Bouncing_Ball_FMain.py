@@ -85,7 +85,7 @@ class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
-        self.surf.fill((random.randint(0, 255),random.randint(0, 255), random.randint(0, 255)))
+        self.surf.fill(RED) #(random.randint(0, 255),random.randint(0, 255), random.randint(0, 255)) can be used for random colors
         self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
         self.speed = random.randint(-4, 4)
@@ -129,8 +129,8 @@ for x in range(random.randint(7, 9)):
     all_sprites.add(pl)
     value = 0
 
-image = pygame.image.load("BB_Background.png").convert() #Placed outside loop to prevent loading repeatedly
-startingscreen = pygame.image.load("Background_Starting.png").convert() #Placed outside loop to prevent loading repeatedly
+image = pygame.image.load("CCCG.png").convert() #Placed outside loop to prevent loading repeatedly
+startingscreen = pygame.image.load("The ultimate gaming experiance.png").convert() #Placed outside loop to prevent loading repeatedly
 start = False
 
 #Platform destruction and game over
