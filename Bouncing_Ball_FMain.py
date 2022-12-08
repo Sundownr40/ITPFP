@@ -114,7 +114,7 @@ P1 = Player()
 
 #Base platform
 BPLT.surf = pygame.Surface((WIDTH, 20)) 
-BPLT.surf.fill((WHITE))
+BPLT.surf.fill((BLUE))
 BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
 #Sprites
