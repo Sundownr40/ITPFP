@@ -112,28 +112,34 @@ def plat_gen(): #Platform generation
 BPLT = Platform()
 P1 = Player()
 
-BPLT.surf = pygame.Surface((WIDTH, 20))
+#Base platform
+BPLT.surf = pygame.Surface((WIDTH, 20)) 
 BPLT.surf.fill((WHITE))
 BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
+#Sprites
 all_sprites = pygame.sprite.Group()
 all_sprites.add(BPLT)
 all_sprites.add(P1)
 
+#Platforms
 platforms = pygame.sprite.Group()
 platforms.add(BPLT)
 
+#Platform gen to ensure there will always be an acceptable amount
 for x in range(random.randint(7, 9)):
     pl = Platform()
     platforms.add(pl)
     all_sprites.add(pl)
     value = 0
 
+#Image loading
 image = pygame.image.load("CCCG.png").convert() #Placed outside loop to prevent loading repeatedly
 startingscreen = pygame.image.load("The ultimate gaming experiance.png").convert() #Placed outside loop to prevent loading repeatedly
 start = False
 
 #Platform destruction and game over
+#Game loop
 while True:
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -160,7 +166,7 @@ while True:
                 pygame.quit()
                 sys.exit()
         
-        displaysurface.blit(image, (0, 0))
+        displaysurface.blit(image, (0, 0)) #Image
         P1.update()
         plat_gen()
     
@@ -169,7 +175,7 @@ while True:
             entity.move()   
 
     else:
-        displaysurface.blit(startingscreen, (0, 0))
+        displaysurface.blit(startingscreen, (0, 0)) #Starting Screen with instructions is active. 
 
     pygame.display.update()
     FramePerSec.tick(FPS)
