@@ -44,7 +44,7 @@ FPS = 60 #FPS
 FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
 
 #Setting up clock to mesh with the FPS
-displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 400x450px Screen for the game
+displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 800x800px Screen for the game
 pygame.display.set_caption("Bouncing Ball") #Names my game "Bouncing Ball" on the white game bar
 
 #Instantiating Classes (Player/Platforms)
@@ -52,7 +52,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
         self.surf = pygame.Surface((40, 40))
-        self.surf.fill((BLUE))
+        self.surf.fill((RED))
         self.rect = self.surf.get_rect()
         self.pos = vec((WIDTH/2, HEIGHT))
         self.vel = vec(0,-4)
@@ -81,11 +81,11 @@ class Player(pygame.sprite.Sprite):
         if autobounce:
            self.vel.y = -20 
            
-class platform(pygame.sprite.Sprite): #Small moving platforms
+class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
-        self.surf.fill(WHITE)
+        self.surf.fill((random.randint(0, 255),random.randint(0, 255), random.randint(0, 255)))
         self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
         self.speed = random.randint(-4, 4)
@@ -93,8 +93,8 @@ class platform(pygame.sprite.Sprite): #Small moving platforms
         self.moving = True
 
     def move(self): #Movement for the Small moving platforms
-        if self.moving == True:  
-            self.rect.move_ip(self.speed,0)
+        if self.moving:  
+            self.rect.move_ip(self.speed, 0)
             if self.speed > 0 and self.rect.left > WIDTH:
                 self.rect.right = 0
             if self.speed < 0 and self.rect.right < 0:
@@ -103,18 +103,18 @@ class platform(pygame.sprite.Sprite): #Small moving platforms
 def plat_gen(): #Platform generation
     while len(platforms) < 9 :
         width = random.randint(75,300)
-        p = platform()             
+        p = Platform()             
         p.rect.center = (random.randint(0, WIDTH - width),
                         random.randint(-50, 0))
         platforms.add(p)
         all_sprites.add(p)
 
-BPLT = platform()
+BPLT = Platform()
 P1 = Player()
 
 BPLT.surf = pygame.Surface((WIDTH, 20))
 BPLT.surf.fill((WHITE))
-BPLT.rect = BPLT.surf.get_rect(center = (WIDTH/2, HEIGHT-15))
+BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
 all_sprites = pygame.sprite.Group()
 all_sprites.add(BPLT)
@@ -124,12 +124,14 @@ platforms = pygame.sprite.Group()
 platforms.add(BPLT)
 
 for x in range(random.randint(7, 9)):
-    pl = platform()
+    pl = Platform()
     platforms.add(pl)
     all_sprites.add(pl)
     value = 0
 
-variableforfirstplatform = 0
+image = pygame.image.load("BB_Background.png").convert() #Placed outside loop to prevent loading repeatedly
+startingscreen = pygame.image.load("Background_Starting.png").convert() #Placed outside loop to prevent loading repeatedly
+start = False
 
 #Platform destruction and game over
 while True:
@@ -138,28 +140,36 @@ while True:
             pygame.quit()
             sys.exit()
 
-    if P1.rect.top <= HEIGHT / 3:
-        P1.pos.y += abs(P1.vel.y)
-        for plat in platforms:
-            plat.rect.y += abs(P1.vel.y)
-            if plat.rect.top >= HEIGHT:
-                plat.kill()
+        if event.type == pygame.KEYDOWN: #Checks if key is pressed. If spacebar is pressed, the game will start.
+            if event.key == pygame.K_SPACE:
+                start = True
+    
+    if start:
+        if P1.rect.top <= HEIGHT / 3:
+            P1.pos.y += abs(P1.vel.y)
+            for plat in platforms:
+                plat.rect.y += abs(P1.vel.y)
+                if plat.rect.top >= HEIGHT:
+                    plat.kill()
 
-    if P1.rect.top > HEIGHT:
+        if P1.rect.top > HEIGHT:
+            for entity in all_sprites:
+                entity.kill()
+                displaysurface.fill((RED))
+                pygame.display.update()
+                pygame.quit()
+                sys.exit()
+        
+        displaysurface.blit(image, (0, 0))
+        P1.update()
+        plat_gen()
+    
         for entity in all_sprites:
-            entity.kill()
-            displaysurface.fill((RED))
-            pygame.display.update()
-            pygame.quit()
-            sys.exit()
-         
-    displaysurface.fill((BLACK)) #This is where I will input a background image
-    P1.update()
-    plat_gen()
- 
-    for entity in all_sprites:
-        displaysurface.blit(entity.surf, entity.rect)
-        entity.move()
- 
+            displaysurface.blit(entity.surf, entity.rect)
+            entity.move()   
+
+    else:
+        displaysurface.blit(startingscreen, (0, 0))
+
     pygame.display.update()
     FramePerSec.tick(FPS)
