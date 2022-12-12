@@ -9,6 +9,8 @@
 #                                                                                             #
 ###############################################################################################
 
+#NEED: Death Screen + Slime image as P1
+
 #Global Variables
 import pygame
 from pygame.locals import *
@@ -34,6 +36,8 @@ GREY = (131, 139, 139)
 BROWN = (156, 102, 31)
 DARKGREEN = (0, 100, 0)
 SLIMEGREEN = (0, 201, 87)
+
+platformcolorlist = GREY, BROWN, DARKGREEN, SLIMEGREEN #created a color list for the platforms to use. It will take a random color from this list and use it as the base platform. 
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
@@ -86,7 +90,7 @@ class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,100), 12))
-        self.surf.fill(RED) #(random.randint(0, 255),random.randint(0, 255), random.randint(0, 255)) can be used for random colors
+        self.surf.fill(random.choice(platformcolorlist)) #selects from the color list above, choosing from various minecraft colors
         self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
         self.speed = random.randint(-4, 4)
@@ -115,7 +119,7 @@ P1 = Player() #Naming player for use (shorthand)
 
 #Base platform
 BPLT.surf = pygame.Surface((WIDTH, 20)) 
-BPLT.surf.fill((BLUE))
+BPLT.surf.fill((random.choice(platformcolorlist)))
 BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
 #Sprites
@@ -136,7 +140,7 @@ for x in range(random.randint(7, 9)): #Integer between these two values
 
 #Image loading
 image = pygame.image.load("Minecraft_Sunrise.png").convert() #Placed outside loop to prevent loading repeatedly
-startingscreen = pygame.image.load("Slime_Jump_Starting_Screen.png").convert() #Placed outside loop to prevent loading repeatedly
+startingscreen = pygame.image.load("Slime_Jump_Starting_Screen1.png").convert() #Placed outside loop to prevent loading repeatedly
 start = False
 
 #Platform destruction and game over
