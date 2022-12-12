@@ -136,7 +136,7 @@ for x in range(random.randint(7, 9)): #Integer between these two values
 
 #Image loading
 image = pygame.image.load("Minecraft_Sunrise.png").convert() #Placed outside loop to prevent loading repeatedly
-startingscreen = pygame.image.load("The ultimate gaming experiance.png").convert() #Placed outside loop to prevent loading repeatedly
+startingscreen = pygame.image.load("Slime_Jump_Starting_Screen.png").convert() #Placed outside loop to prevent loading repeatedly
 start = False
 
 #Platform destruction and game over
