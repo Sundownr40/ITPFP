@@ -33,6 +33,7 @@ PINK = (243, 58, 106)
 GREY = (131, 139, 139)
 BROWN = (156, 102, 31)
 DARKGREEN = (0, 100, 0)
+SLIMEGREEN = (0, 201, 87)
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
@@ -45,14 +46,14 @@ FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
 
 #Setting up clock to mesh with the FPS
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 800x800px Screen for the game
-pygame.display.set_caption("Bouncing Ball") #Names my game "Bouncing Ball" on the white game bar
+pygame.display.set_caption("Slime Jump") #Names my game "Bouncing Ball" on the white game bar
 
 #Instantiating Classes (Player/Platforms)
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
         self.surf = pygame.Surface((40, 40))
-        self.surf.fill((RED))
+        self.surf.fill((SLIMEGREEN))
         self.rect = self.surf.get_rect()
         self.pos = vec((WIDTH/2, HEIGHT))
         self.vel = vec(0,-4)
@@ -134,7 +135,7 @@ for x in range(random.randint(7, 9)): #Integer between these two values
     value = 0
 
 #Image loading
-image = pygame.image.load("CCCG.png").convert() #Placed outside loop to prevent loading repeatedly
+image = pygame.image.load("Minecraft_Sunrise.png").convert() #Placed outside loop to prevent loading repeatedly
 startingscreen = pygame.image.load("The ultimate gaming experiance.png").convert() #Placed outside loop to prevent loading repeatedly
 start = False
 
