@@ -9,7 +9,7 @@
 #                                                                                             #
 ###############################################################################################
 
-#NEED: Death Screen + Slime image as P1
+#NEED: Death Screen + Platforms as slabs
 
 #Global Variables
 import pygame
@@ -43,7 +43,7 @@ platformcolorlist = GREY, BROWN, DARKGREEN, SLIMEGREEN #created a color list for
 HEIGHT = 800 #HEIGHT
 WIDTH = 800 #WIDTH
 ACC = 0.5 #ACCELERATION
-FRIC = -0.01 #FRICTION
+FRIC = -0.05 #FRICTION
 FPS = 60 #FPS
 
 FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
@@ -56,8 +56,7 @@ pygame.display.set_caption("Slime Jump") #Names my game "Bouncing Ball" on the w
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__() 
-        self.surf = pygame.Surface((40, 40))
-        self.surf.fill((SLIMEGREEN))
+        self.surf = pygame.image.load("Slime_P1.png").convert()
         self.rect = self.surf.get_rect()
         self.pos = vec((WIDTH/2, HEIGHT))
         self.vel = vec(0,-4)
@@ -89,7 +88,7 @@ class Player(pygame.sprite.Sprite):
 class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
-        self.surf = pygame.Surface((random.randint(50,100), 12))
+        self.surf = pygame.Surface((random.randint(50,150), 12))
         self.surf.fill(random.choice(platformcolorlist)) #selects from the color list above, choosing from various minecraft colors
         self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
