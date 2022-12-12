@@ -109,8 +109,8 @@ def plat_gen(): #Platform generation
         platforms.add(p)
         all_sprites.add(p)
 
-BPLT = Platform()
-P1 = Player()
+BPLT = Platform() #Naming platform for use (shorthand)
+P1 = Player() #Naming player for use (shorthand)
 
 #Base platform
 BPLT.surf = pygame.Surface((WIDTH, 20)) 
@@ -127,7 +127,7 @@ platforms = pygame.sprite.Group()
 platforms.add(BPLT)
 
 #Platform gen to ensure there will always be an acceptable amount
-for x in range(random.randint(7, 9)):
+for x in range(random.randint(7, 9)): #Integer between these two values
     pl = Platform()
     platforms.add(pl)
     all_sprites.add(pl)
@@ -141,7 +141,7 @@ start = False
 #Platform destruction and game over
 #Game loop
 while True:
-    for event in pygame.event.get():
+    for event in pygame.event.get(): #Evauluating quit status of program (to see if functionally running)
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
@@ -151,14 +151,14 @@ while True:
                 start = True
     
     if start:
-        if P1.rect.top <= HEIGHT / 3:
+        if P1.rect.top <= HEIGHT / 3: #If the player is accelrrating past a certain point, the platforms substantially below will cease to exist
             P1.pos.y += abs(P1.vel.y)
             for plat in platforms:
                 plat.rect.y += abs(P1.vel.y)
                 if plat.rect.top >= HEIGHT:
-                    plat.kill()
+                    plat.kill() #Kills platform, enabling player to die if they fall off (or more accuratelt, down off of) the screen. 
 
-        if P1.rect.top > HEIGHT:
+        if P1.rect.top > HEIGHT: 
             for entity in all_sprites:
                 entity.kill()
                 displaysurface.fill((RED))
@@ -166,16 +166,16 @@ while True:
                 pygame.quit()
                 sys.exit()
         
-        displaysurface.blit(image, (0, 0)) #Image
+        displaysurface.blit(image, (0, 0)) #Image display
         P1.update()
         plat_gen()
     
         for entity in all_sprites:
-            displaysurface.blit(entity.surf, entity.rect)
+            displaysurface.blit(entity.surf, entity.rect) #O
             entity.move()   
 
     else:
         displaysurface.blit(startingscreen, (0, 0)) #Starting Screen with instructions is active. 
 
-    pygame.display.update()
-    FramePerSec.tick(FPS)
+    pygame.display.update() #updates display
+    FramePerSec.tick(FPS) #ensures FPS is consistent 
