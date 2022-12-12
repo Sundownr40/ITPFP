@@ -42,7 +42,7 @@ platformcolorlist = GREY, BROWN, DARKGREEN, SLIMEGREEN #created a color list for
 #Global Variables
 HEIGHT = 800 #HEIGHT
 WIDTH = 800 #WIDTH
-ACC = 0.9 #ACCELERATION
+ACC = 0.5 #ACCELERATION
 FRIC = -0.01 #FRICTION
 FPS = 60 #FPS
 
