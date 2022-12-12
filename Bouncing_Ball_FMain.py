@@ -1,5 +1,6 @@
 ###############################################################################################
 # SOURCES                                                                                     #
+# Chris Cozort's Intro to Computer Programming Class Course Files (https://bcpsj-my.sharepoint.com/personal/ccozort_bcp_org/_layouts/15/onedrive.aspx?id=%2Fpersonal%2Fccozort%5Fbcp%5Forg%2FDocuments%2FDocuments%2F000%5FIntro%20to%20Programming%2F2022%5FFall%2FCode&ga=1)
 # (https://coderslegacy.com/python/pygame)                                                    #
 # (https://api.arcade.academy/en/latest/examples/platform_tutorial/index.html)                #
 # (https://api.arcade.academy/en/latest/examples/platform_tutorial/step_08.html)              #
@@ -7,10 +8,6 @@
 # (https://pythonprogramming.net/pygame-start-menu-tutorial/)                                 #
 #                                                                                             #
 ###############################################################################################
-
-#I want 
-#Starting Screen
-#Background image
 
 #Global Variables
 import pygame
@@ -33,6 +30,9 @@ YELLOW = (255,211,67)
 ORANGE = (255,128,0)
 PURPLE = (106, 13, 173)
 PINK = (243, 58, 106)
+GREY = (131, 139, 139)
+BROWN = (156, 102, 31)
+DARKGREEN = (0, 100, 0)
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
