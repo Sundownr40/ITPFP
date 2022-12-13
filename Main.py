@@ -6,21 +6,19 @@
 # (https://api.arcade.academy/en/latest/examples/platform_tutorial/step_08.html)              #
 # (https://coderslegacy.com/python/pygame-platformer-game-development/)                       #
 # (https://pythonprogramming.net/pygame-start-menu-tutorial/)                                 #
+# Ryan Deivert '23 - Special thanks for assistance in my platform generation errors           #
 #                                                                                             #
 ###############################################################################################
-
-#NEED: Death Screen + Platforms as slabs
 
 #Global Variables
 import pygame
 from pygame.locals import *
 import sys
 import random
+pygame.init() #Initializes pygame, the API I am using for the game.
 
-#Initialize Pygame
-pygame.init() 
-
-vec = pygame.math.Vector2 #2-Dimensional vectors (Vector2)
+#Utilizing 2-Dimensional vectors (Vector2). It is easier to store information in a vector as opposed to 2 seperate cordinates. Higher functionality. 
+vec = pygame.math.Vector2 
 
 #Colors. I like having a large variety 
 WHITE = (255, 255, 255)
@@ -37,20 +35,23 @@ BROWN = (156, 102, 31)
 DARKGREEN = (0, 100, 0)
 SLIMEGREEN = (0, 201, 87)
 
-platformcolorlist = GREY, BROWN, DARKGREEN, SLIMEGREEN #created a color list for the platforms to use. It will take a random color from this list and use it as the base platform. 
+#Created a color tuple for the platforms to use. 
+#It will take a random color and use it as the base platform. 
+platformcolortuple = GREY, BROWN, DARKGREEN, SLIMEGREEN
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
 WIDTH = 800 #WIDTH
 ACC = 0.5 #ACCELERATION
 FRIC = -0.05 #FRICTION
-FPS = 60 #FPS
+FPS = 60 #FRAMES PER SECOND
 
-FramePerSec = pygame.time.Clock() #Clock/FPS. Will be used to modify FPS
+#Clock/FPS. Will be used to modify FPS
+FramePerSec = pygame.time.Clock()
 
 #Setting up clock to mesh with the FPS
-displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #for me, this means a 800x800px Screen for the game
-pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the white game bar
+displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #In "Slime Jump's" case, this means a 800x800px Screen for the game
+pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the white game bar (window)
 
 #Instantiating Classes (Player/Platforms)
 class Player(pygame.sprite.Sprite):
@@ -63,11 +64,13 @@ class Player(pygame.sprite.Sprite):
         self.acc = vec(0,0)
         self.jumping = False
         self.score = 0
-    
-    def dead(self):
+
+    #Dead status 
+    def dead(self): 
        return self.rect.top > HEIGHT
 
-    def move(self): #Movement keys and acceleration
+    #Movement dynamics 
+    def move(self): #Movement keys, variables and acceleration
         self.acc = vec(0,0.5)
         pressed_keys = pygame.key.get_pressed()     
         if pressed_keys[K_a]:
@@ -83,7 +86,8 @@ class Player(pygame.sprite.Sprite):
             self.pos.x = WIDTH         
         self.rect.midbottom = self.pos
 
-        autobounce = pygame.sprite.spritecollide(self, platforms, False) #Player will constantly "bounce" when comes into contact with a platform.
+        #Bounce when Slime hits platform
+        autobounce = pygame.sprite.spritecollide(self, platforms, False) 
         if autobounce:
            self.vel.y = -20
         
@@ -91,14 +95,14 @@ class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
         self.surf = pygame.Surface((random.randint(50,200), 12))
-        self.surf.fill(random.choice(platformcolorlist)) #selects from the color ddlist above, choosing from various minecraft colors
-        self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
+        self.surf.fill(random.choice(platformcolortuple)) #selects from the color tuple above, choosing from various minecraft colors
+        self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10), #Set platform to random position
                                                  random.randint(0, HEIGHT-250)))
         self.speed = random.randint(-4, 4)
         self.point = True
         self.moving = True
 
-    def move(self): #Movement for the Small moving platforms
+    def move(self): #Off-screen switch sides
         if self.moving:  
             self.rect.move_ip(self.speed, 0)
             if self.speed > 0 and self.rect.left > WIDTH:
@@ -107,11 +111,11 @@ class Platform(pygame.sprite.Sprite): #Small moving platforms
                 self.rect.left = WIDTH
 
 def plat_gen(): #Platform generation
-    while len(platforms) < 9 :
-        width = random.randint(75,300)
+    while len(platforms) < 8:
+        width = random.randint(75, 300)
         p = Platform()             
         p.rect.center = (random.randint(0, WIDTH - width),
-                        random.randint(-50, 0))
+                        random.randint(-60, 0))
         platforms.add(p)
         all_sprites.add(p)
 
@@ -119,8 +123,8 @@ BPLT = Platform() #Instantiating platforms
 P1 = Player() #Instantiting a player 
 
 #Base platform
-BPLT.surf = pygame.Surface((WIDTH, 20)) 
-BPLT.surf.fill((random.choice(platformcolorlist)))
+BPLT.surf = pygame.Surface((WIDTH * 2, 20)) 
+BPLT.surf.fill((random.choice(platformcolortuple)))
 BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
 #Sprites
@@ -145,30 +149,25 @@ startingscreen = pygame.image.load("Slime_Jump_Starting_Screen1.png").convert() 
 deathscreen = pygame.image.load("You_Died.png").convert() #Death screen placed outside loop to prevent loading issues
 start = False
 
+deathtimer = 3000 #upon death, the death screen will appear for 3 second before the program exits. 
+
 #Platform destruction and game over
 #Game loop
 while True:
+    isdead = P1.dead()
     for event in pygame.event.get(): #Evauluating quit status of program (to see if functionally running)
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
 
         if event.type == pygame.KEYDOWN: #Checks if key is pressed. If spacebar is pressed, the game will start.
-            if event.key == pygame.K_ESCAPE:
+            if event.key == pygame.K_ESCAPE: #Esc = exit game
                 pygame.quit()
                 sys.exit()
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_SPACE: #Clicking space begins the game from the home screen
                 start = True
-    
-      #if P1.rect.top > HEIGHT: 
-            #for entity in all_sprites:
-                #entity.kill()
-                #displaysurface.fill((RED))
-                #pygame.display.update()
-                #pygame.quit()
-                #sys.exit()
-    if start:
-        
+
+    if start: #If space is pressed...
         if P1.rect.top <= HEIGHT / 3: #If the player is accelrrating past a certain point, the platforms substantially below will cease to exist
             P1.pos.y += abs(P1.vel.y)
             for plat in platforms:
@@ -176,18 +175,23 @@ while True:
                 if plat.rect.top >= HEIGHT:
                     plat.kill() #Kills platform, enabling player to die if they fall off (or more accuratelt, down off of) the screen. 
         
-        displaysurface.blit(background, (0, 0)) #Image display
-        P1.update() #since 60fps, it will update every 60th of a second
+        displaysurface.blit(background, (0, 0)) #Image display of background
+        if not isdead:
+            P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
     
-        for entity in all_sprites:
-            displaysurface.blit(entity.surf, entity.rect) #O
+        for entity in all_sprites: #Iterates through all_sprites
+            displaysurface.blit(entity.surf, entity.rect)
             entity.move() #calls move method for all objects in "all_sprites" list
 
-    else:
+    else: #if space has not been pressed...
         displaysurface.blit(startingscreen, (0, 0)) #Starting Screen with instructions is active. 
-    if P1.dead():
+    if isdead: #if P1 dies...
         displaysurface.blit(deathscreen, (0, 0))
+        deathtimer -= FramePerSec.get_time()
+        if deathtimer <= 0:
+            pygame.quit()
+            sys.exit()
 
     pygame.display.update() #updates display
     FramePerSec.tick(FPS) #ensures FPS is consistent 
