@@ -146,7 +146,7 @@ for x in range(random.randint(7, 9)): #Integer between these two values
 #Image loading
 background = pygame.image.load("Minecraft_Sunrise.png").convert() #Placed outside loop to prevent loading repeatedly
 startingscreen = pygame.image.load("Slime_Jump_Starting_Screen1.png").convert() #Placed outside loop to prevent loading repeatedly
-deathscreen = pygame.image.load("You_Died.png").convert() #Death screen placed outside loop to prevent loading issues
+deathscreen = pygame.image.load("You_Died_Updated.png").convert() #Death screen placed outside loop to prevent loading issues
 start = False
 
 deathtimer = 3000 #upon death, the death screen will appear for 3 second before the program exits. 
