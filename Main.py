@@ -83,13 +83,13 @@ class Player(pygame.sprite.Sprite):
 
         autobounce = pygame.sprite.spritecollide(self, platforms, False) #Player will constantly "bounce" when comes into contact with a platform.
         if autobounce:
-           self.vel.y = -20 
+           self.vel.y = -20
            
 class Platform(pygame.sprite.Sprite): #Small moving platforms
     def __init__(self):
         super().__init__()
-        self.surf = pygame.Surface((random.randint(50,150), 12))
-        self.surf.fill(random.choice(platformcolorlist)) #selects from the color list above, choosing from various minecraft colors
+        self.surf = pygame.Surface((random.randint(50,200), 12))
+        self.surf.fill(random.choice(platformcolorlist)) #selects from the color ddlist above, choosing from various minecraft colors
         self.rect = self.surf.get_rect(center = (random.randint(0, WIDTH-10),
                                                  random.randint(0, HEIGHT-250)))
         self.speed = random.randint(-4, 4)
