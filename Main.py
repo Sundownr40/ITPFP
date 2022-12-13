@@ -187,7 +187,7 @@ while True:
     else: #if space has not been pressed...
         displaysurface.blit(startingscreen, (0, 0)) #Starting Screen with instructions is active. 
     if isdead: #if P1 dies...
-        pygame.time.wait(1000) #waits for a second before death screen to allow player to comprehend their death
+        pygame.time.wait(500) #waits for a 1/2 second before death screen to allow player to comprehend their death
         displaysurface.blit(deathscreen, (0, 0))
         deathtimer -= FramePerSec.get_time()
         if deathtimer <= 0:
