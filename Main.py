@@ -193,7 +193,7 @@ while True:
         pygame.time.wait(500) #waits for a 1/2 second before death screen to allow player to comprehend their death
         displaysurface.blit(deathscreen, (0, 0))
         deathtimer -= FramePerSec.get_time()
-        if deathtimer <= 0:
+        if deathtimer <= 0: #3 seconds of "You Died!" screen before the game quits
             pygame.quit()
             sys.exit()
 
