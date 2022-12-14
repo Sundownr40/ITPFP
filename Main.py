@@ -7,7 +7,8 @@
 # (https://www.webucator.com/article/python-color-constants-module/)                          #
 # (https://coderslegacy.com/python/pygame-platformer-game-development/)                       #
 # (https://pythonprogramming.net/pygame-start-menu-tutorial/)                                 #
-# Ryan Deivert '23 - Special thanks for assistance in my platform generation errors           #
+# Ryan Deivert '23 - Special thanks for assistance in my platform generation errors           # 
+# Juan Lepe '23 - Special thanks for adding of score counter                                  #
 #                                                                                             #
 ###############################################################################################
 
@@ -49,12 +50,24 @@ ACC = 0.5 #ACCELERATION
 FRIC = -0.05 #FRICTION
 FPS = 60 #FRAMES PER SECOND
 
+#Settings
+POINTS = 0
+
 #Clock/FPS. Will be used to modify FPS
 FramePerSec = pygame.time.Clock()
 
 #Setting up clock to mesh with the FPS
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #In "Slime Jump's" case, this means a 800x800px Screen for the game
 pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the white game bar (window)
+
+def draw_text(text, size, color, x, y):
+
+        font_name = pygame.font.match_font('arial')
+        font = pygame.font.Font(font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        displaysurface.blit(text_surface, text_rect)
 
 #Instantiating Classes (Player/Platforms)
 class Player(pygame.sprite.Sprite):
@@ -122,22 +135,22 @@ def plat_gen(): #Platform generation
         platforms.add(p)
         all_sprites.add(p)
 
-BPLT = Platform() #Instantiating platforms
+PLTS = Platform() #Instantiating platforms
 P1 = Player() #Instantiting a player 
 
 #Base platform
-BPLT.surf = pygame.Surface((WIDTH * 2, 20)) 
-BPLT.surf.fill((random.choice(platformcolortuple)))
-BPLT.rect = BPLT.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
+PLTS.surf = pygame.Surface((WIDTH * 2, 20)) 
+PLTS.surf.fill((random.choice(platformcolortuple)))
+PLTS.rect = PLTS.surf.get_rect(center = (WIDTH / 2, HEIGHT - 15))
 
 #Sprites
 all_sprites = pygame.sprite.Group()
-all_sprites.add(BPLT)
+all_sprites.add(PLTS)
 all_sprites.add(P1)
 
 #Platforms
 platforms = pygame.sprite.Group()
-platforms.add(BPLT)
+platforms.add(PLTS)
 
 #Platform gen to ensure there will always be an acceptable amount
 for x in range(random.randint(7, 9)): #Integer between these two values
@@ -154,7 +167,6 @@ start = False
 
 deathtimer = 3000 #upon death, the death screen will appear for 3 second before the program exits. 
 
-#Platform destruction and game over
 #Game loop
 while True:
     isdead = P1.dead()
@@ -178,8 +190,18 @@ while True:
                 if plat.rect.top >= HEIGHT:
                     plat.kill() #Kills platform, enabling player to die if they fall off (or more accurately, down off of) the screen
         
+        # platformhits = pygame.spritecollide(P1, PLTS, True)
+        # if platformhits:
+        #     POINTS += 20 # number of points per contact
+        #     print(POINTS)
+        #     print(platformhits[0].RED)
+
+        # hits = pygame.sprite.spritecollide(P1, PLTS, False)
+        # plthits = pygame.sprite.spritecollide(P1, PLTS, True)
+
         displaysurface.blit(background, (0, 0)) #Image display of background
         if not isdead:
+            #draw_text("Points P1: " + str(POINTS), 22, RED, WIDTH/2, HEIGHT/2)
             P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
     
