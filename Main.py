@@ -15,9 +15,9 @@ import pygame
 from pygame.locals import *
 import sys
 import random
-pygame.init() #Initializes pygame, the API I am using for the game.
+pygame.init() #Initializes pygame, the API I am using for the game
 
-#Utilizing 2-Dimensional vectors (Vector2). It is easier to store information in a vector as opposed to 2 seperate cordinates. Higher functionality. 
+#Utilizing 2-Dimensional vectors (Vector2). It is easier to store information in a vector as opposed to 2 seperate cordinates. Higher functionality
 vec = pygame.math.Vector2 
 
 #Colors. I like having a large variety 
@@ -37,8 +37,8 @@ SLIMEGREEN = (0, 201, 87)
 TANGREEN = (139, 139, 0)
 YELLOWGREEN = (205, 205, 0)
 
-#Created a color tuple for the platforms to use. 
-#It will take a random color and use it as the base platform. 
+#Created a color tuple for the platforms to use
+#It will take a random color and use it as the base platform
 platformcolortuple = GREY, BROWN, DARKGREEN, SLIMEGREEN, TANGREEN, YELLOWGREEN
 
 #Global Variables
@@ -162,7 +162,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-        if event.type == pygame.KEYDOWN: #Checks if key is pressed. If spacebar is pressed, the game will start.
+        if event.type == pygame.KEYDOWN: #Checks if key is pressed. If spacebar is pressed, the game will start
             if event.key == pygame.K_ESCAPE: #Esc = exit game
                 pygame.quit()
                 sys.exit()
@@ -170,12 +170,12 @@ while True:
                 start = True
 
     if start: #If space is pressed...
-        if P1.rect.top <= HEIGHT / 3: #If the player is accelrrating past a certain point, the platforms substantially below will cease to exist
+        if P1.rect.top <= HEIGHT / 3: #If the player is accelerating past a certain point, the platforms substantially below will cease to exist
             P1.pos.y += abs(P1.vel.y)
             for plat in platforms:
                 plat.rect.y += abs(P1.vel.y)
                 if plat.rect.top >= HEIGHT:
-                    plat.kill() #Kills platform, enabling player to die if they fall off (or more accuratelt, down off of) the screen. 
+                    plat.kill() #Kills platform, enabling player to die if they fall off (or more accurately, down off of) the screen
         
         displaysurface.blit(background, (0, 0)) #Image display of background
         if not isdead:
