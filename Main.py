@@ -34,10 +34,12 @@ GREY = (131, 139, 139)
 BROWN = (156, 102, 31)
 DARKGREEN = (0, 100, 0)
 SLIMEGREEN = (0, 201, 87)
+TANGREEN = (139, 139, 0)
+YELLOWGREEN = (205, 205, 0)
 
 #Created a color tuple for the platforms to use. 
 #It will take a random color and use it as the base platform. 
-platformcolortuple = GREY, BROWN, DARKGREEN, SLIMEGREEN
+platformcolortuple = GREY, BROWN, DARKGREEN, SLIMEGREEN, TANGREEN, YELLOWGREEN
 
 #Global Variables
 HEIGHT = 800 #HEIGHT
