@@ -4,6 +4,7 @@
 # (https://coderslegacy.com/python/pygame)                                                    #
 # (https://api.arcade.academy/en/latest/examples/platform_tutorial/index.html)                #
 # (https://api.arcade.academy/en/latest/examples/platform_tutorial/step_08.html)              #
+# (https://www.webucator.com/article/python-color-constants-module/)                          #
 # (https://coderslegacy.com/python/pygame-platformer-game-development/)                       #
 # (https://pythonprogramming.net/pygame-start-menu-tutorial/)                                 #
 # Ryan Deivert '23 - Special thanks for assistance in my platform generation errors           #
