@@ -166,6 +166,7 @@ deathscreen = pygame.image.load("You_Died_Updated.png").convert() #Death screen 
 start = False
 
 deathtimer = 3000 #upon death, the death screen will appear for 3 second before the program exits. 
+safeplattimer = 5000 #timer for the safety platform generation
 
 #Game loop
 while True:
@@ -198,9 +199,17 @@ while True:
 
         displaysurface.blit(background, (0, 0)) #Image display of background
         if not isdead:
-            draw_text("Points P1: " + str(POINTS), 40, BLACK, WIDTH/6, HEIGHT/20)
+            draw_text("Points P1: " + str(POINTS), 40, BLACK, WIDTH/8, HEIGHT/16)
             P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
+
+        safeplattimer -= FramePerSec.get_time() #in case timer goes below 0, it will reset
+        if safeplattimer <= 0:
+            safetyplat = Platform()
+            safetyplat.rect.y = 400
+            all_sprites.add(safetyplat)
+            platforms.add(safetyplat)
+            safeplattimer = 5000
 
         for entity in all_sprites: #Iterates through all_sprites
             displaysurface.blit(entity.surf, entity.rect)
