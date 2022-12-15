@@ -60,6 +60,7 @@ FramePerSec = pygame.time.Clock()
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT)) #In "Slime Jump's" case, this means a 800x800px Screen for the game
 pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the white game bar (window)
 
+#Drawing text to use for score tracking 
 def draw_text(text, size, color, x, y):
 
         font_name = pygame.font.match_font('impact')
