@@ -165,7 +165,7 @@ startingscreen = pygame.image.load("Slime_Jump_Starting_Screen1.png").convert() 
 deathscreen = pygame.image.load("You_Died_Updated.png").convert() #Death screen placed outside loop to prevent loading issues
 start = False
 
-deathtimer = 3000 #upon death, the death screen will appear for 3 second before the program exits. 
+deathtimer = 7000 #upon death, the death screen will appear for 7 seconds before the program exits. 
 safeplattimer = 5000 #timer for the safety platform generation
 
 #Game loop
@@ -199,10 +199,11 @@ while True:
 
         displaysurface.blit(background, (0, 0)) #Image display of background
         if not isdead:
-            draw_text("Points P1: " + str(POINTS), 40, BLACK, WIDTH/8, HEIGHT/16)
+            draw_text("Points P1: " + str(POINTS), 40, BLACK, WIDTH/5.5, HEIGHT/16)
             P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
 
+        #Safety platform generation in-sync with a 5 second timer to ensure P1 always has a place to jump
         safeplattimer -= FramePerSec.get_time() #in case timer goes below 0, it will reset
         if safeplattimer <= 0:
             safetyplat = Platform()
@@ -221,7 +222,8 @@ while True:
         pygame.time.wait(500) #waits for a 1/2 second before death screen to allow player to comprehend their death
         displaysurface.blit(deathscreen, (0, 0))
         deathtimer -= FramePerSec.get_time()
-        if deathtimer <= 0: #3 seconds of "You Died!" screen before the game quits
+        draw_text("Your score was: " + str(POINTS), 80, BLACK, WIDTH/2, HEIGHT/80)
+        if deathtimer <= 0: #7 seconds of "You Died!" screen before the game quits
             pygame.quit()
             sys.exit()
 
