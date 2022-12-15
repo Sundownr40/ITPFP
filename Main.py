@@ -51,7 +51,7 @@ FRIC = -0.05 #FRICTION
 FPS = 60 #FRAMES PER SECOND
 
 #Settings
-POINTS = 0
+POINTS = -20
 
 #Clock/FPS. Will be used to modify FPS
 FramePerSec = pygame.time.Clock()
@@ -62,7 +62,7 @@ pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the whit
 
 def draw_text(text, size, color, x, y):
 
-        font_name = pygame.font.match_font('arial')
+        font_name = pygame.font.match_font('impact')
         font = pygame.font.Font(font_name, size)
         text_surface = font.render(text, True, color)
         text_rect = text_surface.get_rect()
@@ -190,21 +190,18 @@ while True:
                 if plat.rect.top >= HEIGHT:
                     plat.kill() #Kills platform, enabling player to die if they fall off (or more accurately, down off of) the screen
         
-        # platformhits = pygame.spritecollide(P1, PLTS, True)
-        # if platformhits:
-        #     POINTS += 20 # number of points per contact
-        #     print(POINTS)
-        #     print(platformhits[0].RED)
-
-        # hits = pygame.sprite.spritecollide(P1, PLTS, False)
-        # plthits = pygame.sprite.spritecollide(P1, PLTS, True)
+        platformhits = pygame.sprite.spritecollide(P1, platforms, False)
+        if platformhits:
+            POINTS += 10 # number of points per contact
+            print(POINTS)
+            print(platformhits[0])
 
         displaysurface.blit(background, (0, 0)) #Image display of background
         if not isdead:
-            #draw_text("Points P1: " + str(POINTS), 22, RED, WIDTH/2, HEIGHT/2)
+            draw_text("Points P1: " + str(POINTS), 40, BLACK, WIDTH/6, HEIGHT/20)
             P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
-    
+
         for entity in all_sprites: #Iterates through all_sprites
             displaysurface.blit(entity.surf, entity.rect)
             entity.move() #calls move method for all objects in "all_sprites" list
