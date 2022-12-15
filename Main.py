@@ -203,11 +203,11 @@ while True:
             P1.update() #since 60fps, it will update every 60th of a second
         plat_gen()
 
-        #Safety platform generation in-sync with a 5 second timer to ensure P1 always has a place to jump
-        safeplattimer -= FramePerSec.get_time() #in case timer goes below 0, it will reset
+        #Safety platform generation in-sync with a 5 second timer to ensure P1 always has a place to jump ()
+        safeplattimer -= FramePerSec.get_time()
         if safeplattimer <= 0:
             safetyplat = Platform()
-            safetyplat.rect.y = 400
+            safetyplat.rect.y = HEIGHT/2
             all_sprites.add(safetyplat)
             platforms.add(safetyplat)
             safeplattimer = 5000
@@ -223,7 +223,7 @@ while True:
         displaysurface.blit(deathscreen, (0, 0))
         deathtimer -= FramePerSec.get_time()
         draw_text("Your score was: " + str(POINTS), 80, BLACK, WIDTH/2, HEIGHT/80)
-        if deathtimer <= 0: #7 seconds of "You Died!" screen before the game quits
+        if deathtimer <= 0: #7 seconds of "You Died!" and displays score death screen before the game quits
             pygame.quit()
             sys.exit()
 
