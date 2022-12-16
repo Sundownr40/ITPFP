@@ -62,7 +62,6 @@ pygame.display.set_caption("Slime Jump") #Names my game "Slime Jump" on the whit
 
 #Drawing text to use for score tracking 
 def draw_text(text, size, color, x, y):
-
         font_name = pygame.font.match_font('impact')
         font = pygame.font.Font(font_name, size)
         text_surface = font.render(text, True, color)
